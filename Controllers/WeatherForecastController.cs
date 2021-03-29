@@ -36,6 +36,7 @@ namespace webApiTest.Controllers
             .ToArray();
         }
 
+        //Return a string
         [HttpGet("{id}")]
         public string Get(int id)
         {
@@ -47,6 +48,27 @@ namespace webApiTest.Controllers
                 return " please specify an id from 0 to 9";
             }
             return Summaries[id];
+        }
+
+
+        // Return a list of header names and their values.
+        [HttpGet("header")]
+        public IActionResult GetHeader()
+        {
+            var headers = base.Request.Headers;
+
+            return base.Ok(headers);
+        }
+
+        // Return a list of query names and their values.
+        [HttpGet("query")]
+        public IActionResult GetQuery()
+        {
+            //The varaible query will contains the query value passed. Weare using here just to differetiate from the Get without parameters.
+
+            var query_from_URL = base.Request.Query;
+
+            return base.Ok(query_from_URL);
         }
     }
 }
